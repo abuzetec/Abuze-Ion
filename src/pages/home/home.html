@@ -3,13 +3,12 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-searchbar (ionInput)="doSearch($event)" [(ngModel)]="search"></ion-searchbar>
+    <ion-searchbar [(ngModel)]="search"></ion-searchbar>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let offer of offers">
-  
+  <ion-card *ngFor="let offer of offers | offerFilter: search">
     <ion-slides pager>
       <ion-slide>
         <img [src]="offer.main_photo"/>
@@ -32,8 +31,8 @@
       </h2>
       <ion-grid>
         <ion-row>
-          <ion-col width-50 class="old-price">{{offer.original_price}}</ion-col>
-          <ion-col width-50 class="offer-price">{{offer.offer_price}}</ion-col>          
+          <ion-col width-50 class="old-price">{{offer.original_price | asMoney}}</ion-col>
+          <ion-col width-50 class="offer-price">{{offer.offer_price | asMoney}}</ion-col>          
         </ion-row>
       </ion-grid>
       <button ion-button block color="abuze">VEJA MAIS</button>

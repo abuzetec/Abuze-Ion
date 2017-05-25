@@ -9,15 +9,17 @@ import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { ImgCacheDirective } from '../directives/img-cache/img-cache';
-import { HttpDefaultHeaders } from '../providers/http-default-headers'
+import { HttpDefaultHeaders } from '../providers/http-default-headers';
+import { MoneyPipe } from '../pipes/money/money';
+import { OfferFilterPipe } from '../pipes/offer-filter/offer-filter';
 
 @NgModule({
   declarations: [
     Abuze,
     HomePage,
     ListPage,
-    ImgCacheDirective
+    MoneyPipe,
+    OfferFilterPipe
   ],
   imports: [
     BrowserModule,

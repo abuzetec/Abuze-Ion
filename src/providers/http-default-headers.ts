@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BaseRequestOptions, Headers } from '@angular/http';
-import { ENV } from '../../config/environment.dev'
+import { ENV } from '../config/environment.dev'
 
 @Injectable()
 export class HttpDefaultHeaders extends BaseRequestOptions{
