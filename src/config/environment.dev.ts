@@ -1,6 +1,7 @@
 export const ENV = {  
   PRODUCTION : false,
-  API_URL    : 'http://192.168.0.11:8080/v2',
-  APP_ID: '59901624522356711365',
-  APP_TOKEN: '9da16b366bf2bcd854f1bda8d786a9f5f9f3f2a3541a4bb8f9c69d7dc1824cea'
+  API_URL    : 'https://apin.abuze.com.br/v2',
+  LEGACY_API_URL: 'https://api.abuze.com.br/v1',
+  APP_ID: '80190887705669364861',
+  APP_TOKEN: 'fe5be768d46c8726571c0668fa186098f978b1b3a81ccc9c9871c130943f8fed'
 };

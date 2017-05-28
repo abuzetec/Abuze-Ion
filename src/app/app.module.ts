@@ -5,21 +5,32 @@ import { HttpModule, RequestOptions } from '@angular/http';
 
 import { Abuze } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+import { CouponsPage } from '../pages/coupons/coupons';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpDefaultHeaders } from '../providers/http-default-headers';
 import { MoneyPipe } from '../pipes/money/money';
 import { OfferFilterPipe } from '../pipes/offer-filter/offer-filter';
+import { CouponsFilterPipe } from '../pipes/coupons-filter';
+
+import { Login } from '../modals/login/login';
+import { Coupon } from '../modals/coupon/coupon';
+
+import { SessionData } from '../providers/session/session-data';
+import { CitiesProvider } from '../providers/cities/cities';
+import { Loading } from '../providers/loading';
 
 @NgModule({
   declarations: [
     Abuze,
     HomePage,
-    ListPage,
+    CouponsPage,
     MoneyPipe,
-    OfferFilterPipe
+    OfferFilterPipe,
+    CouponsFilterPipe,
+    Login,
+    Coupon
   ],
   imports: [
     BrowserModule,
@@ -30,11 +41,16 @@ import { OfferFilterPipe } from '../pipes/offer-filter/offer-filter';
   entryComponents: [
     Abuze,
     HomePage,
-    ListPage
+    CouponsPage,
+    Login,
+    Coupon
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    SessionData,
+    Loading,
+    CitiesProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     {provide: RequestOptions, useClass: HttpDefaultHeaders}
   ]

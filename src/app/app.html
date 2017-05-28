@@ -9,23 +9,20 @@
 
   <ion-content>
     <ion-list>
-      <button menuClose ion-item (click)="openPage(p)">
-        <ion-icon name="home"></ion-icon> Ofertas
-      </button>
-      <button menuClose ion-item (click)="openPage(p)">
+      <button menuClose ion-item (click)="showLoginModal()" *ngIf="!isLogged()">
         <ion-icon name="log-in"></ion-icon> Login
       </button>
 
-      <button menuClose ion-item (click)="openPage(p)">
+      <button menuClose ion-item (click)="pushTo(couponsPage)" *ngIf="isLogged()">
         <ion-icon name="pricetags"></ion-icon> Meus cupons
       </button>
-      <button menuClose ion-item (click)="openPage(p)">
+      <button menuClose ion-item (click)="openPage(p)" *ngIf="isLogged()">
         <ion-icon name="contact"></ion-icon> Editar meus dados
       </button>
-      <button menuClose ion-item (click)="openPage(p)">
+      <button menuClose ion-item (click)="openPage(p)" *ngIf="isLogged()">
         <ion-icon name="card"></ion-icon> Meus cartões
       </button>
-      <button menuClose ion-item (click)="openPage(p)">
+      <button menuClose ion-item (click)="openPage(p)" *ngIf="isLogged()">
         <ion-icon name="cart"></ion-icon> Meus pedidos
       </button>
       <button menuClose ion-item (click)="openPage(p)">
@@ -34,7 +31,7 @@
       <button menuClose ion-item (click)="openPage(p)">
         <ion-icon name="navigate"></ion-icon> Joinville - SC
       </button>
-      <button menuClose ion-item (click)="openPage(p)">
+      <button menuClose ion-item (click)="logOut()" *ngIf="isLogged()">
         <ion-icon name="log-out"></ion-icon> Sair
       </button>                                    
     </ion-list>

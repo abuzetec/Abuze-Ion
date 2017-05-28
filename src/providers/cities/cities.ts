@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { ENV } from '../../config/environment.dev'
+import { ENV } from '../../config/environment.dev';
 
 @Injectable()
 export class CitiesProvider {
