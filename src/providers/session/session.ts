@@ -26,7 +26,7 @@ export class SessionProvider {
         }, err => {
           resolve(false);
         });
-    });        
+    });
   }
 
   checkLogin(){
@@ -43,8 +43,8 @@ export class SessionProvider {
           this.sessionData.clean();
           resolve(false);
         });
-    });        
-  }  
+    });
+  }
 
   getUserData(){
     return this.sessionData.userData;

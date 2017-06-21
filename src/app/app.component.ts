@@ -4,10 +4,12 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { CouponsPage } from '../pages/coupons/coupons';
+import { CardsPage } from '../pages/cards/cards';
+import { InvoicesPage } from '../pages/invoices/invoices';
 import { Login } from '../modals/login/login';
-
+import { ChangeCityPage } from '../modals/change-city/change-city';
 import { SessionProvider } from '../providers/session/session';
-
+import { CitiesProvider } from  '../providers/cities/cities';
 @Component({
   templateUrl: 'app.html',
   providers: [SessionProvider]
@@ -17,10 +19,14 @@ export class Abuze {
 
   rootPage: any = HomePage;
   couponsPage: any = CouponsPage;
+  cardsPage: any = CardsPage;
+  invoicesPage: any = InvoicesPage
+  changeCityPage: any = ChangeCityPage;
 
   currentUser: any;
+  currentCity: any;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public modalCtrl: ModalController, public session: SessionProvider, public events: Events, public alertCtrl: AlertController, private config: Config) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public modalCtrl: ModalController, public session: SessionProvider, public events: Events, public alertCtrl: AlertController, private config: Config, public citiesProvider: CitiesProvider) {
     this.initializeApp();
   }
 
@@ -51,9 +57,9 @@ export class Abuze {
         }
       ]
     });
-    
+
     confirm.present();
-  }  
+  }
 
   initializeApp() {
     this.platform.ready().then(() => {
@@ -63,18 +69,33 @@ export class Abuze {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
-      this.config.set('backButtonText', 'Voltar');      
+      this.config.set('backButtonText', 'Voltar');
 
       this.events.subscribe('abuze:user:logged', (user) => {
         this.currentUser = user;
-      });    
+
+        /*zE.identify({
+          name: this.currentUser.name,
+          email: this.currentUser.email
+        });*/
+      });
 
       this.session.checkLogin().then(logged => {
         if (logged){
           this.currentUser = this.session.getUserData();
+
+          /*zE.identify({
+            name: this.currentUser.name,
+            email: this.currentUser.email
+          });*/
         }
       });
 
+      this.events.subscribe('abuze:city:changed', (city) => {
+        this.currentCity = city;
+      });
+
+      this.currentCity = this.citiesProvider.getCurrentCity();
     });
   }
 
@@ -82,7 +103,7 @@ export class Abuze {
     this.nav.setRoot(HomePage);
   }
 
-  pushTo(page){
-    this.nav.push(page);
+  pushTo(page, params){
+    this.nav.push(page, params);
   }
 }

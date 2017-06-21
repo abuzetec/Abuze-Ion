@@ -2,9 +2,11 @@
   <ion-header>
     <div class="avatar">
       <img src="assets/img/default-user-pic-.png">
-      <h4>Bruno Frank Silva</h4>
-      <p>bfscordeiro@gmail.com</p>
-    </div>      
+      <div *ngIf="isLogged()">
+        <h4>{{currentUser.name}}</h4>
+        <p>{{currentUser.email}}</p>
+      </div>
+    </div>
   </ion-header>
 
   <ion-content>
@@ -19,21 +21,21 @@
       <button menuClose ion-item (click)="openPage(p)" *ngIf="isLogged()">
         <ion-icon name="contact"></ion-icon> Editar meus dados
       </button>
-      <button menuClose ion-item (click)="openPage(p)" *ngIf="isLogged()">
+      <button menuClose ion-item (click)="pushTo(cardsPage)" *ngIf="isLogged()">
         <ion-icon name="card"></ion-icon> Meus cartões
       </button>
-      <button menuClose ion-item (click)="openPage(p)" *ngIf="isLogged()">
+      <button menuClose ion-item (click)="pushTo(invoicesPage)" *ngIf="isLogged()">
         <ion-icon name="cart"></ion-icon> Meus pedidos
       </button>
-      <button menuClose ion-item (click)="openPage(p)">
+      <button menuClose ion-item onClick="zE.activate({hideOnClose: true});">
         <ion-icon name="help-buoy"></ion-icon> Ajuda
       </button>
-      <button menuClose ion-item (click)="openPage(p)">
-        <ion-icon name="navigate"></ion-icon> Joinville - SC
+      <button menuClose ion-item (click)="pushTo(changeCityPage)" *ngIf="currentCity">
+        <ion-icon name="pin"></ion-icon> {{currentCity.name}} - {{currentCity.state}}
       </button>
       <button menuClose ion-item (click)="logOut()" *ngIf="isLogged()">
         <ion-icon name="log-out"></ion-icon> Sair
-      </button>                                    
+      </button>
     </ion-list>
   </ion-content>
 

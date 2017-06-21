@@ -13,12 +13,17 @@ export class OfferFilterPipe implements PipeTransform {
   /**
    * Takes a value and makes it lowercase.
    */
-  transform(items: any[], filter : string) {
+  transform(items: any[], filter : string, categoryFilter: string) {
     if (!items) {
       return [];
     } else {
       let reg = new RegExp(filter, 'i');
-      return items.filter(it => it.title.match(reg));
+      if (categoryFilter){
+        return items.filter(it => it.title.match(reg) && it.category == categoryFilter);
+      } else {
+        return items.filter(it => it.title.match(reg));
+      }
+
     }
   }
 }

@@ -14,10 +14,11 @@ export class MoneyPipe implements PipeTransform {
    * Takes a value and makes it lowercase.
    */
   transform(value: string, ...args) {
+    let unit = args[0] || 'R$';
     if (value){
-      return 'R$ ' + parseFloat(value).toFixed(2).toString().replace(/\./g, ',');
+      return unit + ' ' + parseFloat(value).toFixed(2).toString().replace(/\./g, ',');
     } else {
-      return 'R$ 0,00';
+      return unit + ' 0,00';
     }
   }
 }

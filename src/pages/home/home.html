@@ -3,39 +3,76 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-searchbar [(ngModel)]="search"></ion-searchbar>
+    <ion-searchbar [(ngModel)]="search" placeholder="Pesquisar"></ion-searchbar>
   </ion-navbar>
+
+  <div class="category-wrap" #categoriesMenu>
+    <ul class="category-menu">
+      <li (click)="filterByCategory(1)" [class.active]="categoryFilter == '1'">
+        Gastronomia e café
+      </li>
+      <li (click)="filterByCategory(2)" [class.active]="categoryFilter == '2'">
+        Estética e beleza
+      </li>
+      <li (click)="filterByCategory(3)" [class.active]="categoryFilter == '3'">
+        Turismo e lazer
+      </li>
+      <li (click)="filterByCategory(4)" [class.active]="categoryFilter == '4'">
+        Shows e eventos
+      </li>
+      <li (click)="filterByCategory(5)" [class.active]="categoryFilter == '5'">
+        Fitness e saúde
+      </li>
+      <li (click)="filterByCategory(6)" [class.active]="categoryFilter == '6'">
+        Outros serviços
+      </li>
+      <li (click)="filterByCategory(7)" [class.active]="categoryFilter == '7'">
+        Automotivos
+      </li>
+      <li (click)="filterByCategory(8)" [class.active]="categoryFilter == '8'">
+        Produtos
+      </li>
+    </ul>
+  </div>
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let offer of offers | offerFilter: search">
+  <ion-card *ngFor="let offer of offers | offerFilter: search | categoryFilter: categoryFilter">
     <ion-slides pager>
       <ion-slide>
         <img [src]="offer.main_photo"/>
       </ion-slide>
 
-      <!--
-      <ion-slide>
-        <img src="assets/img/offer2.jpg"/>
+      <ion-slide *ngFor="let photo of offer.photos">
+        <img [src]="photo.photo_file"/>
       </ion-slide>
-
-      <ion-slide>
-        <img src="assets/img/offer1.jpg"/>
-      </ion-slide>
-      -->
     </ion-slides>
 
     <ion-card-content>
-      <h2>
+      <h2 (click)="showOfferDetails(offer)">
         {{offer.title}}
       </h2>
       <ion-grid>
         <ion-row>
-          <ion-col width-50 class="old-price">{{offer.original_price | asMoney}}</ion-col>
-          <ion-col width-50 class="offer-price">{{offer.offer_price | asMoney}}</ion-col>          
+          <ion-col width-50 class="old-price line-cutting">{{offer.original_price | asMoney}}</ion-col>
+          <ion-col width-50 class="offer-price">{{offer.offer_price | asMoney}}</ion-col>
         </ion-row>
       </ion-grid>
-      <button ion-button block color="abuze">VEJA MAIS</button>
+      <button ion-button block color="abuze" (click)="showOfferDetails(offer)">VEJA MAIS</button>
     </ion-card-content>
   </ion-card>
+
+  <div class="center" *ngIf="offers && (offers | offerFilter: search | categoryFilter: categoryFilter).length == 0">
+    <h1 style="font-size: 40px;">
+      :-(
+    </h1>
+    <h3>
+      Nenhuma oferta disponível!
+    </h3>
+  </div>
+
+  <div class="center margt20" *ngIf="!offers">
+    <ion-spinner></ion-spinner>
+  </div>
+
 </ion-content>

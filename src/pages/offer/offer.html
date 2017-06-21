@@ -1,0 +1,96 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>{{offer.title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-slides pager>
+      <ion-slide>
+        <img [src]="offer.main_photo"/>
+      </ion-slide>
+
+      <ion-slide *ngFor="let photo of offer.photos">
+        <img [src]="photo.photo_file"/>
+      </ion-slide>
+    </ion-slides>
+
+    <ion-card-content>
+      <h2>
+        {{offer.title}}
+      </h2>
+      <ion-grid>
+        <ion-row>
+          <ion-col width-50 class="old-price">
+            <p class="up-label">Preço original</p>
+            <span class="line-cutting">{{offer.original_price | asMoney}}</span>
+          </ion-col>
+          <ion-col width-50 class="offer-discount">
+            <p class="up-label">Desconto</p>
+            {{discount(offer.discount)}}%
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col width-100 class="offer-price-detail">
+            <p class="up-label">A partir de</p>
+            {{offer.offer_price | asMoney}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      Destaques
+    </ion-card-header>
+    <ion-card-content>
+      <ul *ngIf="offerDetail" class="highrules">
+        <li *ngFor="let highlight of offerDetail.highlights" [innerHTML]="highlight.title"></li>
+      </ul>
+      <div class="center" *ngIf="!offerDetail">
+        <ion-spinner></ion-spinner>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      Regras
+    </ion-card-header>
+    <ion-card-content>
+      <ul *ngIf="offerDetail" class="highrules">
+        <li *ngFor="let rule of offerDetail.rules" [innerHTML]="rule.title"></li>
+      </ul>
+      <div class="center" *ngIf="!offerDetail">
+        <ion-spinner></ion-spinner>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <div class="center" *ngIf="partner">
+        <img [src]="partner.logo" style="width: 40%; display: inline;">
+        <h2>{{partner.name}}</h2>
+        <p>{{partner.address}}, {{partner.number}}, {{partner.district}}</p>
+        <p>{{partner.city}} - {{partner.state}}</p>
+        <p><a (click)="openPartnerSite()">Site do parceiro</a></p>
+        <p><a (click)="showOnMap()">Ver no mapa</a></p>
+      </div>
+      <div class="center" *ngIf="!partner">
+        <ion-spinner></ion-spinner>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <div [innerHTML]="offer.description" padding style="margin-bottom: 80px">
+  </div>
+</ion-content>
+
+<div class="fixed-bottom" padding *ngIf="offerDetail">
+  <button ion-button block color="actcall">COMPRAR</button>
+</div>

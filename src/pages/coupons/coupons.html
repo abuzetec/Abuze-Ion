@@ -15,7 +15,7 @@
 <ion-content>
   <ion-list *ngIf="filter == 'available'">
     <button ion-item [navPush]="couponsPage" [navParams]="{filter: 'archived'}" class="archived-coupons">
-      <ion-icon name="pricetags" item-left></ion-icon>
+      <ion-icon name="folder" item-left></ion-icon>
       Cupons arquivados
     </button>
   </ion-list>
@@ -31,9 +31,23 @@
         </h2>
         <div class="margt20">
           <button ion-button color="abuze" (click)="showCoupon(coupon);">Ver cupom</button>
-          <button ion-button color="secondary" *ngIf="filter == 'available'">Já usei</button>
+          <button ion-button color="secondary" (click)="archiveCoupon(coupon);" *ngIf="filter == 'available'">Arquivar</button>
         </div>
       </div>        
     </ion-card-content>
   </ion-card>
+
+
+  <div class="center" *ngIf="coupons && (coupons | couponsFilter: filter).length == 0">
+    <h1 style="font-size: 40px;">
+      :-(
+    </h1>
+    <h3>
+      Nenhum cupom disponível no momento!
+    </h3>
+  </div>      
+
+  <div class="center margt20" *ngIf="!coupons">
+    <ion-spinner></ion-spinner>
+  </div>    
 </ion-content>

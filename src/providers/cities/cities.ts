@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Events } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { ENV } from '../../config/environment.dev';
@@ -9,21 +10,26 @@ export class CitiesProvider {
   currentCity:any;
   cities:any;
 
-  constructor(public http: Http) {
+  constructor(public http: Http, public events:Events) {
+  }
+
+  defaultCity(){
+    return { name: "Joinville", state: "SC", id: 9 };
   }
 
   getCurrentCity(){
     if (!this.currentCity){
-      this.currentCity = window.localStorage.getItem("currentCity") || 9;
+      this.currentCity = JSON.parse(window.localStorage.getItem("currentCity")) || this.defaultCity();
     }
 
     return this.currentCity;
   }
 
-  setCurrentCity(cityID){
-    window.localStorage.setItem("currentCity", cityID);
+  setCurrentCity(city){
+    window.localStorage.setItem("currentCity", JSON.stringify(city));
 
-    this.currentCity = cityID;
+    this.currentCity = city;
+    this.events.publish('abuze:city:changed', city);
   }
 
   load(){

@@ -13,11 +13,76 @@
 </ion-header>
 
 
-<ion-content padding>
-  <div class="center">
-    <div id="qrcode">QRCODE</div>
+<ion-content>
+  <div class="center margt20">
+    <qr-code [value]="coupon.token" [size]="150"></qr-code>
+    <p class="coupon-token">{{coupon.token}}</p>
   </div>
-  {{coupon.name}}
 
-  BRUNO FRANK
+  <ion-list no-border>
+    <ion-item>
+      <ion-icon name='pricetag' item-start></ion-icon>
+      Oferta: 
+      <ion-note item-end> 
+        {{coupon.title}}
+      </ion-note>
+    </ion-item>  
+
+    <ion-item *ngIf="coupon.stablishment">
+      <ion-icon name='pin' item-start></ion-icon>
+      Estabelecimento: 
+      <ion-note item-end> 
+        {{coupon.stablishment}}
+      </ion-note>
+    </ion-item>      
+
+    <ion-item>
+      <ion-icon name='pin' item-start></ion-icon>
+      Endereço: 
+      <ion-note item-end> 
+        {{coupon.address}}
+      </ion-note>
+    </ion-item>          
+
+    <ion-item>
+      <ion-icon name='person' item-start></ion-icon>
+      Nome: 
+      <ion-note item-end> 
+        {{coupon.name}}
+      </ion-note>
+    </ion-item>  
+
+    <ion-item>
+      <ion-icon name='cash' item-start></ion-icon>
+      Valor: 
+      <ion-note item-end> 
+        {{coupon.price | asMoney}}
+      </ion-note>
+    </ion-item>      
+
+    <ion-item *ngIf="coupon.scheduled_to">
+      <ion-icon name='calendar' item-start></ion-icon>
+      Agendado para: 
+      <ion-note item-end> 
+        {{ coupon.scheduled_to | date:'dd/MM/yyyy' }}
+      </ion-note>
+    </ion-item>          
+
+    <ion-item>
+      <ion-icon name='calendar' item-start></ion-icon>
+      Validade: 
+      <ion-note item-end> 
+        {{ coupon.expiration | date:'dd/MM/yyyy' }}
+      </ion-note>
+    </ion-item>          
+
+    <ion-item>
+      <ion-icon name='information-circle' item-start></ion-icon>
+      Status: 
+      <ion-note item-end> 
+        {{coupon.used ? "Cupom já utilizado" : "Cupom disponível"}}
+      </ion-note>
+    </ion-item>          
+  </ion-list>  
+  
 </ion-content>

@@ -7,9 +7,9 @@ import { Pipe, PipeTransform } from '@angular/core';
  * Angular Pipes.
  */
 @Pipe({
-  name: 'couponsFilter',
+  name: 'categoryFilter',
 })
-export class CouponsFilterPipe implements PipeTransform {
+export class CategoryFilterPipe implements PipeTransform {
   /**
    * Takes a value and makes it lowercase.
    */
@@ -17,12 +17,10 @@ export class CouponsFilterPipe implements PipeTransform {
     if (!items) {
       return [];
     } else {
-      if (filter == 'available'){
-        return items.filter(it => !it.archived && Date.parse(it.expiration) >= new Date().getTime());        
-      } else if (filter == 'archived'){
-        return items.filter(it => it.archived || Date.parse(it.expiration) < new Date().getTime());        
+      if (filter){
+        return items.filter(it => it.category == filter);
       } else {
-        return [];
+        return items;
       }
     }
   }
