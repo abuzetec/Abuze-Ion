@@ -11,6 +11,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpDefaultHeaders } from '../providers/http-default-headers';
 import { MoneyPipe } from '../pipes/money/money';
+import { PriceAvailablePipe } from '../pipes/offer-filter/price-filter';
+
 import { OfferFilterPipe } from '../pipes/offer-filter/offer-filter';
 import { CategoryFilterPipe } from '../pipes/offer-filter/category-filter';
 
@@ -18,9 +20,11 @@ import { CouponsFilterPipe } from '../pipes/coupons-filter';
 
 import { Login } from '../modals/login/login';
 import { Coupon } from '../modals/coupon/coupon';
+import { ShowOnMap } from '../pages/map/map';
 import { OfferPage } from '../pages/offer/offer';
 import { CardsPage } from '../pages/cards/cards';
 import { ChangeCityPage } from '../modals/change-city/change-city';
+import { PricesPage } from '../modals/prices/prices';
 
 import { SessionData } from '../providers/session/session-data';
 import { CitiesProvider } from '../providers/cities/cities';
@@ -29,6 +33,7 @@ import { Loading } from '../providers/loading';
 import { QRCodeModule } from 'angular2-qrcode';
 import { InvoicesPage } from '../pages/invoices/invoices';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { GoogleMaps } from '@ionic-native/google-maps';
 
 @NgModule({
   declarations: [
@@ -36,15 +41,18 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     HomePage,
     CouponsPage,
     MoneyPipe,
+    PriceAvailablePipe,
     OfferFilterPipe,
     CouponsFilterPipe,
     CategoryFilterPipe,
     Login,
+    ShowOnMap,
     Coupon,
     OfferPage,
     CardsPage,
     InvoicesPage,
-    ChangeCityPage
+    ChangeCityPage,
+    PricesPage
   ],
   imports: [
     BrowserModule,
@@ -62,7 +70,9 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     OfferPage,
     CardsPage,
     InvoicesPage,
-    ChangeCityPage
+    ChangeCityPage,
+    ShowOnMap,
+    PricesPage
   ],
   providers: [
     StatusBar,
@@ -71,6 +81,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     Loading,
     CitiesProvider,
     InAppBrowser,
+    GoogleMaps,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     {provide: RequestOptions, useClass: HttpDefaultHeaders}
   ]

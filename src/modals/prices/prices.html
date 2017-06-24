@@ -1,0 +1,32 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Opções</ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text color="secondary" showWhen="ios">Cancelar</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <button ion-item *ngFor="let price of offerDetail.prices | priceAvailable" (click)="selectPrice(price)">
+      <h2 class="price-option-title">{{price.description}}</h2>
+      <ion-grid>
+        <ion-row>
+          <ion-col width-70 style="color: #999;">
+            {{discount(price.discount)}}% de desconto.<br />
+            Economize {{(price.price - price.offer_price) | asMoney}}
+          </ion-col>
+          <ion-col width-30 style="text-align: right; font-size: 18px; font-weight: bold; padding-top: 5px;">
+            {{price.offer_price | asMoney}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </button>
+  </ion-list>
+</ion-content>

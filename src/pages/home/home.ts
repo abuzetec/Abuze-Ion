@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController, Events } from 'ionic-angular';
 import { OffersProvider } from '../../providers/offers/offers';
 import { OfferPage } from '../offer/offer';
+import { SplashScreen } from '@ionic-native/splash-screen';
 
 @Component({
   selector: 'page-home',
@@ -16,16 +17,19 @@ export class HomePage {
   search: string;
   categoryFilter: string;
 
-  constructor(public navCtrl: NavController, public offersProvider: OffersProvider, public events:Events) {
+  constructor(public navCtrl: NavController, public offersProvider: OffersProvider, public events:Events, public splashScreen: SplashScreen) {
     this.events.subscribe('abuze:city:changed', (city) => {
       this.loadOffers();
     });
-
-    this.loadOffers();
   }
 
   ionViewDidLoad() {
+  }
+
+  ionViewDidEnter(){
     //this.categoriesMenu.nativeElement.scrollLeft = 70;
+    this.splashScreen.hide();
+    this.loadOffers();        
   }
 
   loadOffers(){

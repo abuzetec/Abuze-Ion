@@ -10,6 +10,7 @@ import { Login } from '../modals/login/login';
 import { ChangeCityPage } from '../modals/change-city/change-city';
 import { SessionProvider } from '../providers/session/session';
 import { CitiesProvider } from  '../providers/cities/cities';
+
 @Component({
   templateUrl: 'app.html',
   providers: [SessionProvider]
@@ -61,41 +62,36 @@ export class Abuze {
     confirm.present();
   }
 
+  ionViewDidLoad() {
+    this.session.checkLogin().then(logged => {
+      if (logged){
+        this.currentUser = this.session.getUserData();
+      }
+    });
+
+    this.currentCity = this.citiesProvider.getCurrentCity();
+  }
+
   initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
 
       this.statusBar.styleDefault();
-      this.splashScreen.hide();
 
       this.config.set('backButtonText', 'Voltar');
 
       this.events.subscribe('abuze:user:logged', (user) => {
         this.currentUser = user;
-
-        /*zE.identify({
-          name: this.currentUser.name,
-          email: this.currentUser.email
-        });*/
-      });
-
-      this.session.checkLogin().then(logged => {
-        if (logged){
-          this.currentUser = this.session.getUserData();
-
-          /*zE.identify({
-            name: this.currentUser.name,
-            email: this.currentUser.email
-          });*/
-        }
       });
 
       this.events.subscribe('abuze:city:changed', (city) => {
         this.currentCity = city;
       });
 
-      this.currentCity = this.citiesProvider.getCurrentCity();
+      this.events.subscribe('abuze:login:open', () => {
+        this.showLoginModal();
+      });
     });
   }
 

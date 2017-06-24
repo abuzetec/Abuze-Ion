@@ -35,7 +35,8 @@
         </ion-row>
         <ion-row>
           <ion-col width-100 class="offer-price-detail">
-            <p class="up-label">A partir de</p>
+            <p class="up-label" *ngIf="offerDetail && offerDetail.prices.length > 1">A partir de</p>
+            <p class="up-label" *ngIf="offerDetail && offerDetail.prices.length == 1">Preço atual</p>            
             {{offer.offer_price | asMoney}}
           </ion-col>
         </ion-row>
@@ -71,15 +72,15 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card>
+  <ion-card *ngIf="partner && partner.show_info_on_offers">
     <ion-card-content>
-      <div class="center" *ngIf="partner">
+      <div class="center">
         <img [src]="partner.logo" style="width: 40%; display: inline;">
         <h2>{{partner.name}}</h2>
         <p>{{partner.address}}, {{partner.number}}, {{partner.district}}</p>
         <p>{{partner.city}} - {{partner.state}}</p>
-        <p><a (click)="openPartnerSite()">Site do parceiro</a></p>
-        <p><a (click)="showOnMap()">Ver no mapa</a></p>
+        <p><a (click)="openPartnerSite()" *ngIf="partner.site != ''">Site do parceiro</a></p>
+        <p><a (click)="showOnMap()" *ngIf="partner.latitude != '' && partner.longitude != ''">Ver no mapa</a></p>
       </div>
       <div class="center" *ngIf="!partner">
         <ion-spinner></ion-spinner>
@@ -92,5 +93,6 @@
 </ion-content>
 
 <div class="fixed-bottom" padding *ngIf="offerDetail">
-  <button ion-button block color="actcall">COMPRAR</button>
+  <button ion-button block color="actcall" (click)="buyOffer()" *ngIf="offerDetail.prices.length == 1">COMPRAR</button>
+  <button ion-button block color="actcall" (click)="showPriceOptions()" *ngIf="offerDetail.prices.length > 1">VER OPÇÕES</button>
 </div>
