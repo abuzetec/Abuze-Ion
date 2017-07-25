@@ -37,14 +37,15 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let offer of offers | offerFilter: search | categoryFilter: categoryFilter">
-    <ion-slides pager>
+  <ion-card *ngFor="let offer of offers">
+    <img [src]="offer.main_photo" *ngIf="offer.photos.length == 0" (click)="showOfferDetails(offer)"/>
+    <ion-slides pager *ngIf="offer.photos.length > 0">
       <ion-slide>
-        <img [src]="offer.main_photo"/>
+        <img [src]="offer.main_photo" (click)="showOfferDetails(offer)"/>
       </ion-slide>
 
       <ion-slide *ngFor="let photo of offer.photos">
-        <img [src]="photo.photo_file"/>
+        <img [src]="photo.photo_file" (click)="showOfferDetails(offer)"/>
       </ion-slide>
     </ion-slides>
 
@@ -62,17 +63,8 @@
     </ion-card-content>
   </ion-card>
 
-  <div class="center" *ngIf="offers && (offers | offerFilter: search | categoryFilter: categoryFilter).length == 0">
-    <h1 style="font-size: 40px;">
-      :-(
-    </h1>
-    <h3>
-      Nenhuma oferta disponível!
-    </h3>
-  </div>
-
-  <div class="center margt20" *ngIf="!offers">
-    <ion-spinner></ion-spinner>
-  </div>
+  <ion-infinite-scroll (ionInfinite)="loadOffers($event)">
+    <ion-infinite-scroll-content loadingText="Buscando mais ofertas..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
 </ion-content>

@@ -1,9 +1,15 @@
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title>{{offer.title}}</ion-title>
+    <ion-title>
+      <img src="assets/img/logo-header.png" style="height: 30px;">
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="share();" *ngIf="isOnMobile()">
+        <ion-icon name="share"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
 <ion-content>
@@ -36,7 +42,7 @@
         <ion-row>
           <ion-col width-100 class="offer-price-detail">
             <p class="up-label" *ngIf="offerDetail && offerDetail.prices.length > 1">A partir de</p>
-            <p class="up-label" *ngIf="offerDetail && offerDetail.prices.length == 1">Preço atual</p>            
+            <p class="up-label" *ngIf="offerDetail && offerDetail.prices.length == 1">Preço atual</p>
             {{offer.offer_price | asMoney}}
           </ion-col>
         </ion-row>
@@ -64,7 +70,7 @@
     </ion-card-header>
     <ion-card-content>
       <ul *ngIf="offerDetail" class="highrules">
-        <li *ngFor="let rule of offerDetail.rules" [innerHTML]="rule.title"></li>
+        <li *ngFor="let rule of offerDetail.rules" [innerHTML]="rule.title | removeLinks | treatRules"></li>
       </ul>
       <div class="center" *ngIf="!offerDetail">
         <ion-spinner></ion-spinner>

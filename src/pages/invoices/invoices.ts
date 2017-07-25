@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { InvoicesProvider } from '../../providers/users/invoices'; 
+import { InvoicesProvider } from '../../providers/users/invoices';
 /**
  * Generated class for the InvoicesPage page.
  *
@@ -17,18 +17,15 @@ export class InvoicesPage {
   invoices: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public invoicesProvider: InvoicesProvider) {
+  }
+
+  ionViewDidEnter() {
     this.invoicesProvider.load().then(_invoices => {
       this.invoices = _invoices;
     });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad InvoicesPage');
-  }
-
-
   statusColor(){
-
   }
 
   statusText(invoice){
@@ -44,7 +41,7 @@ export class InvoicesPage {
       return "Aguardando";
     } else {
       return "Cancelado";
-    }      
+    }
   }
 
 }

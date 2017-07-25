@@ -7,11 +7,12 @@ import { Events } from 'ionic-angular';
 
 @Injectable()
 export class OffersProvider {
+  currentPage:any = 0;
 
   constructor(public http: Http, public citiesProvider: CitiesProvider, public events: Events) {
   }
 
-  load(){
+  loadAll(){
     return new Promise(resolve => {
       this.http.get(ENV.API_URL + '/cidade/' + this.citiesProvider.getCurrentCity().id + '/available-offers')
         .map(res => res.json())
@@ -20,6 +21,21 @@ export class OffersProvider {
           resolve(_offers);
         });
     });
+  }
+
+  loadNextPage(){
+    return new Promise(resolve => {
+      this.http.get(ENV.API_URL + '/cidade/' + this.citiesProvider.getCurrentCity().id + '/available-offers/page/' + this.nextPage())
+        .map(res => res.json())
+        .subscribe(_offers => {
+          this.events.publish('abuze:loading:hide');
+          resolve(_offers);
+        });
+    });
+  }
+
+  nextPage(){
+    return ++this.currentPage;
   }
 
   loadDetail(offerID){
@@ -41,6 +57,4 @@ export class OffersProvider {
         });
     });
   }
-
-
 }

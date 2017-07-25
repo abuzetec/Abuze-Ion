@@ -12,6 +12,9 @@ export class CardsPage {
   creditCards: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public creditCardsProvider: CreditCardsProvider, public alertCtrl:AlertController) {
+  }
+
+  ionViewDidEnter() {
     this.creditCardsProvider.load().then(_creditCards => {
       this.creditCards = _creditCards;
     });
@@ -36,7 +39,7 @@ export class CardsPage {
         }
       ]
     });
-    
+
     confirm.present();
   }
 

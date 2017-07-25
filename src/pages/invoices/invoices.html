@@ -28,40 +28,40 @@
 
       <ion-item>
         <ion-icon name='ios-grid-outline' item-start></ion-icon>
-        ID: 
-        <ion-note item-end> 
+        Código:
+        <ion-note item-end>
           {{invoice.id}}
         </ion-note>
-      </ion-item>  
+      </ion-item>
 
       <ion-item>
         <ion-icon name='calendar' item-start></ion-icon>
-        Data: 
-        <ion-note item-end> 
+        Data:
+        <ion-note item-end>
           {{invoice.created_at | date:'dd/MM/yyyy'}}
         </ion-note>
-      </ion-item>      
+      </ion-item>
 
       <ion-item>
         <ion-icon name='cash' item-start></ion-icon>
-        Valor: 
-        <ion-note item-end> 
+        Valor:
+        <ion-note item-end>
           {{invoice.total_price | asMoney}}
         </ion-note>
-      </ion-item>          
+      </ion-item>
 
       <ion-item>
         <ion-icon name='information-circle' item-start></ion-icon>
-        Status: 
-        <ion-note item-end> 
-          {{statusText(invoice)}}
+        Status:
+        <ion-note item-end>
+          <b>{{statusText(invoice)}}</b>
         </ion-note>
-      </ion-item>                
+      </ion-item>
     </ion-card-content>
   </ion-card>
 
   <div class="center margt20" *ngIf="!invoices">
     <ion-spinner></ion-spinner>
   </div>
-    
+
 </ion-content>

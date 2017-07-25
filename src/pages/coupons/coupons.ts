@@ -16,10 +16,12 @@ export class CouponsPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public couponsService: CouponsProvider, public modalCtrl: ModalController, public alertCtrl:AlertController) {
     this.filter = this.navParams.get('filter') || 'available';
+  }
 
+  ionViewDidEnter() {
     this.couponsService.load().then(_coupons => {
       this.coupons = _coupons;
-    });            
+    });
   }
 
   archiveCoupon(coupon){
@@ -42,7 +44,7 @@ export class CouponsPage {
         }
       ]
     });
-    
+
     confirm.present();
   }
 

@@ -19,7 +19,7 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, public offersProvider: OffersProvider, public events:Events, public splashScreen: SplashScreen) {
     this.events.subscribe('abuze:city:changed', (city) => {
-      this.loadOffers();
+      this.loadOffers(null);
     });
   }
 
@@ -29,13 +29,18 @@ export class HomePage {
   ionViewDidEnter(){
     //this.categoriesMenu.nativeElement.scrollLeft = 70;
     this.splashScreen.hide();
-    this.loadOffers();        
+    this.loadOffers(null);
   }
 
-  loadOffers(){
-    this.offers = null;
-    this.offersProvider.load().then(_offers => {
-      this.offers = _offers;
+  loadOffers(infiniteScroll){
+    this.offersProvider.loadNextPage().then(_offers => {
+      if (this.offers){
+        this.offers = this.offers.concat(_offers);
+      } else {
+        this.offers = _offers;
+      }
+
+      if (infiniteScroll) infiniteScroll.complete();
     });
   }
 

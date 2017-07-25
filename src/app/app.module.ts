@@ -17,6 +17,8 @@ import { OfferFilterPipe } from '../pipes/offer-filter/offer-filter';
 import { CategoryFilterPipe } from '../pipes/offer-filter/category-filter';
 
 import { CouponsFilterPipe } from '../pipes/coupons-filter';
+import { TreatRulesPipe } from '../pipes/offer-filter/treat-rules';
+import { RemoveLinksPipe } from '../pipes/html/remove-links';
 
 import { Login } from '../modals/login/login';
 import { Coupon } from '../modals/coupon/coupon';
@@ -45,6 +47,8 @@ import { GoogleMaps } from '@ionic-native/google-maps';
     OfferFilterPipe,
     CouponsFilterPipe,
     CategoryFilterPipe,
+    TreatRulesPipe,
+    RemoveLinksPipe,
     Login,
     ShowOnMap,
     Coupon,
