@@ -7,18 +7,22 @@ export class SessionData {
   userData: any;
 
   constructor() {
-    this.sessionToken = window.localStorage.getItem("session-token");
+    this.sessionToken = localStorage.getItem("session-token");
+  }
+
+  getSessionToken(){
+    return this.sessionToken || localStorage.getItem("session-token");
   }
 
   setUserData(user:any){
-    window.localStorage.setItem("session-token", user.session_token);
+    localStorage.setItem("session-token", user.session_token);
     this.sessionToken = user.session_token;
-    this.userData = user;    
+    this.userData = user;
   }
 
   clean(){
     window.localStorage.removeItem("session-token");
     this.sessionToken = null;
-    this.userData = null;          
+    this.userData = null;
   }
 }

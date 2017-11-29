@@ -35,12 +35,9 @@ export class SessionProvider {
         .map(res => res.json())
         .subscribe(user => {
           this.sessionData.setUserData(user)
-
           this.events.publish('abuze:user:logged', user);
-
           resolve(true);
         }, err => {
-          this.sessionData.clean();
           resolve(false);
         });
     });
@@ -59,6 +56,6 @@ export class SessionProvider {
   }
 
   getSessionToken(){
-    return this.sessionData.sessionToken;
+    return this.sessionData.getSessionToken();
   }
 }

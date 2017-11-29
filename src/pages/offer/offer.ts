@@ -43,7 +43,6 @@ export class OfferPage {
     this.loading.show('sharing');
     let currentCity = this.cityService.getCurrentCity().id;
     let offerUrl = ["https://www.abuze.com.br/cidade/", currentCity, "/oferta/", this.offer.id, "/detalhes"].join('');
-
     this.socialSharing.share(this.offer.title, null, this.offer.main_photo, offerUrl).then(() => {
       this.loading.hide('sharing');
     }).catch(() => {

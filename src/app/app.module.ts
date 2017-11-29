@@ -27,10 +27,12 @@ import { OfferPage } from '../pages/offer/offer';
 import { CardsPage } from '../pages/cards/cards';
 import { ChangeCityPage } from '../modals/change-city/change-city';
 import { PricesPage } from '../modals/prices/prices';
+import { OfflinePage } from '../pages/offline/offline';
 
 import { SessionData } from '../providers/session/session-data';
 import { CitiesProvider } from '../providers/cities/cities';
 import { Loading } from '../providers/loading';
+import { NetStatus } from  '../providers/net-status';
 
 import { QRCodeModule } from 'angular2-qrcode';
 import { InvoicesPage } from '../pages/invoices/invoices';
@@ -56,7 +58,8 @@ import { GoogleMaps } from '@ionic-native/google-maps';
     CardsPage,
     InvoicesPage,
     ChangeCityPage,
-    PricesPage
+    PricesPage,
+    OfflinePage
   ],
   imports: [
     BrowserModule,
@@ -76,7 +79,8 @@ import { GoogleMaps } from '@ionic-native/google-maps';
     InvoicesPage,
     ChangeCityPage,
     ShowOnMap,
-    PricesPage
+    PricesPage,
+    OfflinePage
   ],
   providers: [
     StatusBar,
@@ -84,6 +88,7 @@ import { GoogleMaps } from '@ionic-native/google-maps';
     SessionData,
     Loading,
     CitiesProvider,
+    NetStatus,
     InAppBrowser,
     GoogleMaps,
     {provide: ErrorHandler, useClass: IonicErrorHandler},

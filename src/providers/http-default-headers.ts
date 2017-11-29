@@ -23,7 +23,8 @@ export class HttpDefaultHeaders extends BaseRequestOptions{
       'Content-Type': 'application/json; charset=UTF-8',
       'X-APP-ID': ENV.APP_ID,
       'X-APP-TOKEN': ENV.APP_TOKEN,
-      'X-ACCESS-TOKEN': this.sessionData.sessionToken
+      'X-ACCESS-TOKEN': this.sessionData.getSessionToken()
     });
+    console.log(this.sessionData.getSessionToken());
   }
 }

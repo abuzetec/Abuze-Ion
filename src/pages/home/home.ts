@@ -3,11 +3,12 @@ import { NavController, Events } from 'ionic-angular';
 import { OffersProvider } from '../../providers/offers/offers';
 import { OfferPage } from '../offer/offer';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { NetStatus } from  '../../providers/net-status';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-  providers: [OffersProvider]
+  providers: [OffersProvider, NetStatus]
 })
 export class HomePage {
   @ViewChild('categoriesMenu')
@@ -17,7 +18,7 @@ export class HomePage {
   search: string;
   categoryFilter: string;
 
-  constructor(public navCtrl: NavController, public offersProvider: OffersProvider, public events:Events, public splashScreen: SplashScreen) {
+  constructor(public navCtrl: NavController, public offersProvider: OffersProvider, public events:Events, public splashScreen: SplashScreen, public netStatus:NetStatus) {
     this.events.subscribe('abuze:city:changed', (city) => {
       this.loadOffers(null);
     });

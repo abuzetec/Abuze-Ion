@@ -33,7 +33,7 @@
           <button ion-button color="abuze" (click)="showCoupon(coupon);">Ver cupom</button>
           <button ion-button color="secondary" (click)="archiveCoupon(coupon);" *ngIf="filter == 'available'">Arquivar</button>
         </div>
-      </div>        
+      </div>
     </ion-card-content>
   </ion-card>
 
@@ -45,9 +45,9 @@
     <h3>
       Nenhum cupom disponível no momento!
     </h3>
-  </div>      
+  </div>
 
   <div class="center margt20" *ngIf="!coupons">
     <ion-spinner></ion-spinner>
-  </div>    
+  </div>
 </ion-content>
